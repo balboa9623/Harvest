@@ -133,6 +133,38 @@
 				"type": "function"
 			},
 			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "ethAmount",
+						"type": "uint256"
+					}
+				],
+				"name": "getConvertionRate",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getPriceETH_USD",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"inputs": [],
 				"name": "minUSD",
 				"outputs": [
@@ -188,28 +220,12 @@
 				"dweb:/ipfs/QmaG6vz6W6iEUBsbHSBob5mdcitYxWjoygxREHpsJHfWrS"
 			]
 		},
-		"@openzeppelin/contracts/token/ERC20/IERC20.sol": {
-			"keccak256": "0xe06a3f08a987af6ad2e1c1e774405d4fe08f1694b67517438b467cecf0da0ef7",
-			"license": "MIT",
-			"urls": [
-				"bzz-raw://df6f0c459663c9858b6cba2cda1d14a7d05a985bed6d2de72bd8e78c25ee79db",
-				"dweb:/ipfs/QmeTTxZ7qVk9rjEv2R4CpCwdf8UMCcRqDNMvzNxHc3Fnn9"
-			]
-		},
 		"contracts/Vault.sol": {
-			"keccak256": "0xf854185fd168ab6ec4fc1ec9c35aa73686c2a61142365ba615a017ba2ddd03ab",
+			"keccak256": "0x519980b2ac780405372c541bfa4e3fbe8b86993a20634bdc4a3c1e97deb2a826",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://2814a908c22c72e62021ae90f603155a1816773e48af86a75a13f0ef0e7cdf92",
-				"dweb:/ipfs/QmQaqDEgkh2QfrypahMoDvdVnBizgonUB3YTH1GgV7tiBp"
-			]
-		},
-		"hardhat/console.sol": {
-			"keccak256": "0xf2560b5386574153057104d19a9e68a32ee912cf23c0c8df1fe9a0607f42d543",
-			"license": "MIT",
-			"urls": [
-				"bzz-raw://a63166e036b040826baa513772451a79925daa304b38749100efb089ac07cdc2",
-				"dweb:/ipfs/QmUtMTxUFKU6a5oFXsEJnTPvb3QPb7GDDmSv5yZ1jFHDwR"
+				"bzz-raw://53d5514471592123c6531f0c1de0b7e97da84d6f5bd0ba437496165ada4b6328",
+				"dweb:/ipfs/QmcEKmXikJWD4SXrkydV2FTnv1ipn2cePpQESpvgzR4WAB"
 			]
 		}
 	},

@@ -2,8 +2,7 @@
 pragma solidity ^0.8.18;
 import {AggregatorV3Interface} from "@chainlink/contracts/src/v0.8/shared/interfaces/AggregatorV3Interface.sol";
 
-import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
-import "hardhat/console.sol"; // To be deleted. for testing purpose.
+// import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 contract Vault {
     // Track balances per user per token
@@ -22,7 +21,6 @@ contract Vault {
 
     event UserBalanceCheckByAccount(address enquirerAddress, address accountHolderAddress);
     
-    
     function deposit() public payable {
         require(msg.value > 0, "No ETH sent");
         uint256 usdValue = getConvertionRate(msg.value);
@@ -39,8 +37,7 @@ contract Vault {
         
         // Set balance to 0 first (protects against re-entrancy)
         balances[msg.sender] = 0;
-
-        // Now try to send ETH
+        
         (bool success, ) = payable(msg.sender).call{value: userBalance}("");
         require(success, "Withdrawal failed");
         
@@ -56,7 +53,7 @@ contract Vault {
         return balances[userAddress];
     }
 
-    // 2000000000000000 = $5.03
+    // 2100000000000000 = $5.34
     function getPriceETH_USD() public view returns (uint256) {
         
         AggregatorV3Interface priceFeed = AggregatorV3Interface(
