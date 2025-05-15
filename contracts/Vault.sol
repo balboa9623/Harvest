@@ -4,7 +4,18 @@ import {AggregatorV3Interface} from "@chainlink/contracts/src/v0.8/shared/interf
 
 // import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
+error InsufficientBalance(uint256 balance);
+error Unauthorized();
+error AmountNotSpecified();
+error InvalidPriceDataFeed();
+
 contract Vault {
+
+    address public /* immutable */ i_owner;
+    constructor() {
+        i_owner = msg.sender;
+    }
+
     // Track balances per user per token
     mapping(address => uint256)  balances;
     uint256 public minUSD = 1 * 1e18;
@@ -18,22 +29,23 @@ contract Vault {
 
     event Withdrawal(address indexed user, uint256 amount);
     event Withdrawal(address indexed user, address indexed tokenAddress, uint256 amount);
-
-    event UserBalanceCheckByAccount(address enquirerAddress, address accountHolderAddress);
     
     function deposit() public payable {
-        require(msg.value > 0, "No ETH sent");
+        if(msg.value <= 0) revert AmountNotSpecified();
+        // require(msg.value > 0, "No ETH sent");
         uint256 usdValue = getConvertionRate(msg.value);
         require(usdValue >= minUSD, "Deposit must be at least $1 worth of ETH.");
 
         balances[msg.sender] += msg.value;
+
         emit Deposit(msg.sender, msg.value);
     }
 
 
     function withdraw() public payable {
-        uint256 userBalance = balances[msg.sender];
-        require(userBalance > 0, "Nothing to withdraw");
+        uint256 userBalance = checkBalance();
+        // require(userBalance > 0, "Nothing to withdraw");
+        if(userBalance <= 0) { revert InsufficientBalance(userBalance); }
         
         // Set balance to 0 first (protects against re-entrancy)
         balances[msg.sender] = 0;
@@ -44,12 +56,11 @@ contract Vault {
         emit Withdrawal(msg.sender, userBalance);              // log withdrawal event
     }
 
-    function checkBalance() external view returns (uint256) {
+    function checkBalance() internal view returns (uint256) {
         return balances[msg.sender];
     }
 
-    function checkBalanceWithAddress(address userAddress) private returns (uint256) {
-        emit UserBalanceCheckByAccount(msg.sender, userAddress);
+    function checkBalanceWithAddress(address userAddress) private view ownerOnly returns (uint256) {
         return balances[userAddress];
     }
 
@@ -60,10 +71,11 @@ contract Vault {
             PRICE_FEED_SEPOLIA
         );
         
-        ( , int256 answer, , , ) = priceFeed.latestRoundData();
+        ( , int256 price, , , ) = priceFeed.latestRoundData();
         
-        require(answer > 0, "Invalid price feed");
-        uint256 scaled = uint256(answer) * 1e10;
+        // require(price > 0, "Invalid price feed");
+        if(price <= 0) {revert InvalidPriceDataFeed();}
+        uint256 scaled = uint256(price) * 1e10;
         return scaled;
     }
 
@@ -71,5 +83,10 @@ contract Vault {
         uint256 ethPrice = getPriceETH_USD();
         uint256 usd = (ethPrice * ethAmount) / 1e18;
         return usd;
+    }
+
+    modifier ownerOnly() {
+        if (msg.sender != i_owner) revert Unauthorized();
+        _;
     }
 }
