@@ -7,11 +7,6 @@
 		"abi": [
 			{
 				"inputs": [],
-				"stateMutability": "nonpayable",
-				"type": "constructor"
-			},
-			{
-				"inputs": [],
 				"name": "AmountNotSpecified",
 				"type": "error"
 			},
@@ -24,11 +19,6 @@
 					}
 				],
 				"name": "InsufficientBalance",
-				"type": "error"
-			},
-			{
-				"inputs": [],
-				"name": "InvalidPriceDataFeed",
 				"type": "error"
 			},
 			{
@@ -127,51 +117,6 @@
 				"type": "function"
 			},
 			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "ethAmount",
-						"type": "uint256"
-					}
-				],
-				"name": "getConvertionRate",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "getPriceETH_USD",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "i_owner",
-				"outputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
 				"inputs": [],
 				"name": "minUSD",
 				"outputs": [
@@ -227,12 +172,20 @@
 				"dweb:/ipfs/QmaG6vz6W6iEUBsbHSBob5mdcitYxWjoygxREHpsJHfWrS"
 			]
 		},
-		"contracts/Vault.sol": {
-			"keccak256": "0x8ba40255033312e7f1c128f4da5a9a58021c974eeb74446eababf85ffec20498",
+		"contracts/PriceConverter.sol": {
+			"keccak256": "0xc81452a0f575f80a1bd39195f8ffcd4cf72619d28d32dbf2d941e55fc09fdd63",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://2be00e130d4a32a3896da3dbe0010fe4055645c4de23f3e70f4beff24f5f09f6",
-				"dweb:/ipfs/QmZSABL789Bxkf9wNCVBNB9WecxaMb23dxJkHC7kD2BoJj"
+				"bzz-raw://ec22e2b7ccbd0c4815eb5407725b5e36cd7e6e8d491d66812906b5b929e5554b",
+				"dweb:/ipfs/QmaxQzLxMjAcocYQw55Mfdxh1oohzeUmpiG8V5eb5tHUwY"
+			]
+		},
+		"contracts/Vault.sol": {
+			"keccak256": "0xc3253797da4b2850360c2087dbaea7b3f36ec99ade9787ea2c89ed16f7644dc5",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://5c6f09eacc13fcd627abb4ebaa7a6d03bc6d936de6922b51ca062f9b7f139ba2",
+				"dweb:/ipfs/QmY4wtB1Fpa7efMsQTiHnCzZ51VxK1trUGeKssZBXYktep"
 			]
 		}
 	},
