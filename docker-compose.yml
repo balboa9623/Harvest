@@ -1,0 +1,22 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: harvest_postgress
+    environment:
+      POSTGRES_USER: harvest
+      POSTGRES_PASSWORD: harvestPasswor3User
+      POSTGRES_DB: harvest_db
+    ports:
+      - "5432:5432"
+    # volumes:
+      # - postgres_data:/var/lib/postgresql/data # persistant data storage location (locally)
+    networks:
+      - harvest_net
+
+volumes:
+  postgres_data: {}
+
+networks:
+  harvest_net:
