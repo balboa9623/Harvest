@@ -46,6 +46,7 @@ contract Vault {
         emit Withdrawal(msg.sender, userBalance);              // log withdrawal event
     }
 
+    // Private functions (like checkBalance) won't be visible through the Web3.py interface as they're internal to the contract
     function checkBalance() internal view returns (uint256) {
         return balances[msg.sender];
     }
