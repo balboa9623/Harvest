@@ -10,6 +10,7 @@ library PriceConverter {
     address constant PRICE_FEED_SEPOLIA = 0x694AA1769357215DE4FAC081bf1f309aDC325306;
 
     // 2100000000000000 = $5.34
+    // 400000000000000 = $1.01
     function getPriceETH_USD() public view returns (uint256) {
         
         AggregatorV3Interface priceFeed = AggregatorV3Interface(
