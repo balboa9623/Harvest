@@ -14,11 +14,11 @@ contract Vault {
     
 
     // 'emit' event listener
-    event Deposit(address indexed user, uint256 amount);
-    event Deposit(address indexed user, address indexed tokenAddress, uint256 amount);
+    event DepositETH(address indexed user, uint256 amount, uint256 timestamp);
+    event DepositToken(address indexed user, address indexed tokenAddress, uint256 amount, uint256 timestamp);
 
-    event Withdrawal(address indexed user, uint256 amount);
-    event Withdrawal(address indexed user, address indexed tokenAddress, uint256 amount);
+    event WithdrawETH(address indexed user, uint256 amount, uint256 timestamp);
+    event WithdrawToken(address indexed user, address indexed tokenAddress, uint256 amount, uint256 timestamp);
     
     function deposit() public payable {
         if(msg.value <= 0) revert AmountNotSpecified();
@@ -28,7 +28,7 @@ contract Vault {
 
         balances[msg.sender] += msg.value;
 
-        emit Deposit(msg.sender, msg.value);
+        emit DepositETH(msg.sender, msg.value, block.timestamp);
     }
 
 
@@ -43,13 +43,11 @@ contract Vault {
         (bool success, ) = payable(msg.sender).call{value: userBalance}("");
         require(success, "Withdrawal failed");
         
-        emit Withdrawal(msg.sender, userBalance);              // log withdrawal event
+        emit WithdrawETH(msg.sender, userBalance, block.timestamp);              // log withdrawal event
     }
 
     // Private functions (like checkBalance) won't be visible through the Web3.py interface as they're internal to the contract
-    function checkBalance() internal view returns (uint256) {
+    function checkBalance() public view returns (uint256) {
         return balances[msg.sender];
     }
-
-    
 }
